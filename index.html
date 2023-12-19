@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>hash模式主页面</title>
+    <style>
+        html, body {
+            width: 90%;
+            height: 90%;
+        }
+        iframe {
+            width: 90%;
+            height: 90%;
+        }
+    </style>
+</head>
+<body>
+    <h1>测试HASH模式子路由保持功能</h1>
+    <iframe src="http://localhost:3000/child" id="iframeId" name="iframeName"></iframe>
+    <script>
+        // 2. 接收子页面路由消息
+        window.addEventListener("message", (e) => {
+            console.log("接收子页面消息：", e.data);
+            // 3. 将子页面路由信息存入浏览器缓存
+            window.localStorage.setItem("child_route", e.data);
+        });
+    </script>
+    <script>
+        // 4. 向子页面发送浏览器缓存的路由信息
+        document.getElementById('iframeId').onload = function () {
+            const child_route = window.localStorage.getItem("child_route");
+            if (child_route) {
+                console.log("向子页面发送消息：", child_route);
+                iframeName.window.postMessage(child_route, "http://localhost:3000/child");
+                window.localStorage.removeItem("child_route")
+            }
+        }
+    </script>
+</body>
+</html>

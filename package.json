@@ -1,0 +1,13 @@
+{
+  "name": "iframe-message",
+  "version": "1.0.0",
+  "main": "index.js",
+  "author": "xxhls <heyq020814@qq.com>",
+  "license": "MIT",
+  "scripts": {
+    "serve": "serve"
+  },
+  "dependencies": {
+    "serve": "^14.2.1"
+  }
+}
